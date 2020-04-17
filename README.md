@@ -1,6 +1,6 @@
 # mall-manage-web
 
-> A Vue.js project
+> A Vue.js project ,用来搭建微商城的后台管理系统
 
 ## Build Setup
 
