@@ -29,7 +29,7 @@
           <v-btn icon @click="editBrand(props.item)">
             <i class="el-icon-edit"/>
           </v-btn>
-          <v-btn icon @click="deleteBrand(props.item)">
+          <v-btn icon @click="deleteBrand(props.item.id)">
             <i class="el-icon-delete"/>
           </v-btn>
         </td>
@@ -116,14 +116,30 @@
         })
       },
       addBrand() {
-        // 修改标记
+        // 修改标记，说明当前不是编辑状态，而是新增状态，请求方法应该用POST
         this.isEdit = false;
         // 控制弹窗可见：
         this.show = true;
         // 把oldBrand变为null
         this.oldBrand = null;
       },
-      editBrand(oldBrand){
+      deleteBrand(id) {
+        this.$message.confirm("确认删除？").then(
+          () => {
+            //根据品牌id删除品牌
+            this.$http.delete('/item/brand?id=' + id)
+              .then(() => {
+                this.$message.success("删除成功！");
+                this.getDataFromServer();
+              }).catch(
+              () => {
+                this.$message.error("删除失败！刷新后重试");
+                this.getDataFromServer();
+              }
+            )
+          })
+      },
+      editBrand(oldBrand) {
         // 根据品牌信息查询商品分类
         this.$http.get("/item/category/bid/" + oldBrand.id)
           .then(({data}) => {

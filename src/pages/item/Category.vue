@@ -66,7 +66,7 @@
           url: 'item/category/delete?id=' + id
         }).then(
           (res) => {
-            this.$message.info("删除成功！")
+            this.$message.success("删除成功！")
           }
         ).catch(() => {
           this.$message.error("删除失败！")

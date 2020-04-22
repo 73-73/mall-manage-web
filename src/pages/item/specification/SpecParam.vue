@@ -149,6 +149,7 @@ export default {
           searching:false,
           generic:false}
       this.show = true;
+      this.isEdit = false;
     },
     deleteParam(id) {
         this.$message.confirm("确认要删除该参数吗？")
