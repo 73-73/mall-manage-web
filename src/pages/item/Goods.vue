@@ -45,11 +45,11 @@
           <v-btn icon @click="editGoods(props.item)">
             <i class="el-icon-edit"/>
           </v-btn>
-          <v-btn icon>
+          <v-btn icon @click="deleteGoods(props.item.id)">
             <i class="el-icon-delete"/>
           </v-btn>
-          <v-btn icon v-if="props.item.saleable">下架</v-btn>
-          <v-btn icon v-else>上架</v-btn>
+          <v-btn icon v-if="props.item.saleable" @click="upAndDown(props.item.id,false)">下架</v-btn>
+          <v-btn icon v-else @click="upAndDown(props.item.id,true)">上架</v-btn>
         </td>
       </template>
     </v-data-table>
@@ -119,7 +119,9 @@
         deep: true, // deep为true，会监视pagination的属性及属性中的对象属性变化
         handler() {
           // 变化后的回调函数，这里我们再次调用getDataFromServer即可
-          this.getDataFromServer();
+          //if(!(this.pagination.page == 1 && this.pagination.rowsPerPage ==5)){
+            this.getDataFromServer();
+          //}
         }
       },
       filter: {// 监视搜索字段
@@ -144,7 +146,13 @@
           this.totalGoods = resp.data.total;
           // 完成赋值后，把加载状态赋值为false
           this.loading = false;
-        })
+        }).catch(
+          () => {
+            this.goodsList = [];
+            this.totalGoods = 0;
+            this.loading = false;
+          }
+        )
       },
       addGoods() {
         // 修改标记
@@ -165,6 +173,36 @@
         // 获取要编辑的goods
         this.oldGoods = oldGoods;
       },
+      deleteGoods(spuId) {
+        this.$message.confirm("确认删除？").then(
+          () => {
+            //发起请求，通过spuId删除改商品
+            this.$http.delete("item/spu/delete/" + spuId)
+              .then(res => {
+                this.$message.success("删除成功！");
+                this.getDataFromServer();
+              })
+              .catch(res => {
+                this.$message.error("删除失败，刷新后重试");
+              })
+          }
+        )
+      },
+      upAndDown(spuId, isPut) {
+        //如果isPut为true，说明需要上架， 否则是下架
+        //发起请求，通过spuId删除改商品
+        this.$http.put("item/good/saleable", {
+          id: spuId,
+          saleable: isPut
+        })
+          .then(res => {
+            this.$message.success("操作成功！");
+            this.getDataFromServer();
+          })
+          .catch(res => {
+            this.$message.error("操作失败，刷新后重试");
+          })
+      },
       closeWindow() {
         console.log(1)
         // 重新加载数据
@@ -174,13 +212,13 @@
         // 将步骤调整到1
         this.step = 1;
       },
-      previous(){
-        if(this.step > 1){
+      previous() {
+        if (this.step > 1) {
           this.step--
         }
       },
-      next(){
-        if(this.step < 4 && this.$refs.goodsForm.$refs.basic.validate()){
+      next() {
+        if (this.step < 4 && this.$refs.goodsForm.$refs.basic.validate()) {
           this.step++
         }
       }

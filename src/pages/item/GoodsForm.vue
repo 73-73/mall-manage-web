@@ -63,7 +63,7 @@
           <v-card class="my-2">
             <v-container grid-list-md fluid>
             <v-layout wrap row justify-space-between class="px-5">
-              <v-flex xs12 sm5 v-for="param in specs" :key="param.name">
+              <v-flex xs12 sm5 v-for="param in specs" :key="param.id">
                 <v-text-field :label="param.name" v-model="param.v" :suffix="param.unit || ''"
                  />
               </v-flex>
@@ -76,7 +76,7 @@
       <v-stepper-content step="4">
         <v-flex class="mx-auto">
           <!--遍历特有规格参数-->
-          <v-card flat v-for="spec in specialSpecs" :key="spec.name">
+          <v-card flat v-for="spec in specialSpecs" :key="spec.name" length>
             <!--特有参数的标题-->
             <div class="subheading">{{spec.name}}:</div>
             <!--特有参数的待选项，需要判断是否有options，如果没有，展示文本框，让用户自己输入-->
@@ -225,7 +225,7 @@ export default {
           // 成功，关闭窗口
           this.$emit("close");
           // 提示成功
-          this.$message.success("保存成功了");
+          this.$message.success("保存成功!");
         })
         .catch(() => {
           this.$message.error("保存失败！");

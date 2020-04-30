@@ -113,7 +113,14 @@
           this.totalBrands = resp.data.total;
           // 完成赋值后，把加载状态赋值为false
           this.loading = false;
-        })
+        }).catch(
+          resp=>{
+            this.$message.info("此条件下无数据！");
+            this.brands = [];
+            this.totalBrands = 0;
+            this.loading = false;
+          }
+        )
       },
       addBrand() {
         // 修改标记，说明当前不是编辑状态，而是新增状态，请求方法应该用POST
