@@ -284,7 +284,7 @@ export default {
             });
           // 根据分类查询规格参数
           this.$http
-            .get("/item/spec/params?cid=" + this.goods.categories[2].id)
+            .get("/item/spec/params/" + this.goods.categories[2].id)
             .then(({ data }) => {
               let specs = [];
               let template = [];

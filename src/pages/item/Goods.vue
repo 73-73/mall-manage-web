@@ -151,6 +151,7 @@
             this.goodsList = [];
             this.totalGoods = 0;
             this.loading = false;
+            this.$message.info("此条件下无数据！");
           }
         )
       },
