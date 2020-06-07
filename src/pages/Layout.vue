@@ -2,7 +2,7 @@
   <v-app :dark="dark">
     <!-- 左侧导航条 -->
     <v-navigation-drawer
-      :dark="dark"
+      dark
       persistent
       :mini-variant="miniVariant"
       v-model="drawer"
@@ -17,7 +17,7 @@
               <img src="../assets/2.jpeg">
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>锋哥</v-list-tile-title>
+              <v-list-tile-title>jack</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -51,18 +51,22 @@
       </v-list>
     </v-navigation-drawer>
     <!-- 顶部工具条 -->
-    <v-toolbar
+    <!--<v-toolbar
       app
       dark
       :color="dark ? 'secondary' : 'primary'"
+    >-->
+    <v-toolbar
+      app
+      dark
     >
       <!-- 隐藏左侧菜单的按钮-->
       <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
       <!-- 收起左侧菜单的按钮-->
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
+      <!--<v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"/>
-      </v-btn>
-      <!-- 切换黑暗主题 -->
+      </v-btn>-->
+<!--      &lt;!&ndash; 切换黑暗主题 &ndash;&gt;
       <v-flex xs1>
         <v-switch
           :label="dark ? '暗黑' : '明亮'"
@@ -70,26 +74,26 @@
           color="dark"
           hide-details
         />
-      </v-flex>
+      </v-flex>-->
       <!-- 顶部导航标题 -->
-      <v-flex xs3></v-flex>
-      <v-toolbar-title v-text="title"/>
+      <v-flex xs5></v-flex>
+      <v-toolbar-title v-text="title" />
       <v-spacer/>
 
-      <!-- 调色板 -->
+<!--      &lt;!&ndash; 调色板 &ndash;&gt;
       <v-btn icon @click.stop="dark = !dark">
         <v-icon>invert_colors</v-icon>
       </v-btn>
-      <!-- 顶部导航用户菜单 -->
+      &lt;!&ndash; 顶部导航用户菜单 &ndash;&gt;
       <v-btn icon @click.stop="dark = !dark">
         <v-icon>account_box</v-icon>
-      </v-btn>
+      </v-btn>-->
     </v-toolbar>
     <!--中间内容主体-->
     <v-content>
       <v-breadcrumbs>
         <v-icon slot="divider">chevron_right</v-icon>
-        <v-breadcrumbs-item>{{item1}}</v-breadcrumbs-item>
+        <v-breadcrumbs-item class="breadcrumbes-item1">{{item1}}</v-breadcrumbs-item>
         <v-breadcrumbs-item>{{item2}}</v-breadcrumbs-item>
       </v-breadcrumbs>
       <div>
@@ -107,7 +111,7 @@
     data() {
       return {
         dark: false,// 是否暗黑主题
-        drawer: true,// 左侧导航是否隐藏
+        drawer: false,// 左侧导航是否隐藏
         miniVariant: false,// 左侧导航是否收起
         title: '商城后台管理',// 顶部导航条名称,
         menuMap: {}

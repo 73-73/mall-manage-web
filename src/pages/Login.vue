@@ -5,7 +5,7 @@
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
-              <v-toolbar dark color="primary">
+              <v-toolbar dark>
                 <v-toolbar-title>商城后台管理</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
@@ -25,7 +25,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="doLogin">登录</v-btn>
+                <v-btn dark @click="doLogin">登录</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -54,8 +54,19 @@ export default {
         this.dialog = true;
         return false;
       }
-      console.log(this.username + " ... " + this.password);
-      this.$router.push("/");
+      //请求后端接口，验证用户和密码
+      // 发起请求
+      this.$http.post("/auth/accredit", this.$qs.stringify({
+        username:this.username,
+        password:this.password
+      })).then(()=>{
+        this.$message.success("登录成功！");
+        this.$router.push("/item/list");
+      }).catch(
+       ()=>{
+         this.$message.error("用户名密码错误");
+       }
+      )
     }
   }
 };

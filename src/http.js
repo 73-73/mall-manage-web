@@ -4,6 +4,7 @@ import config from './config'
 
 axios.defaults.baseURL = config.api; // 设置axios的基础请求路径
 axios.defaults.timeout = 2000; // 设置axios的请求时间
+axios.defaults.withCredentials = true //设置可以存储cookie
 
 // axios.interceptors.request.use(function (config) {
 //   // console.log(config);
