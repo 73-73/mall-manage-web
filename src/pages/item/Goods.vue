@@ -51,7 +51,7 @@
           <v-btn icon v-if="props.item.saleable" @click="upAndDown(props.item.id,false)">下架</v-btn>
           <v-btn icon v-else @click="upAndDown(props.item.id,true)">上架</v-btn>
         </td>
-        <td class="text-xs-center" style="color: red">审核中</td>
+<!--        <td class="text-xs-center" style="color: red">审核中</td>-->
       </template>
     </v-data-table>
     <!--弹出的对话框-->
@@ -104,7 +104,7 @@
           {text: '商品分类', align: 'center', sortable: false, value: 'cname'},
           {text: '品牌', align: 'center', value: 'bname', sortable: false,},
           {text: '操作', align: 'center', sortable: false},
-          {text: '状态', align: 'center', sortable: false}
+          // {text: '状态', align: 'center', sortable: false}
         ],
         show: false,// 控制对话框的显示
         oldGoods: {}, // 即将被编辑的商品信息
@@ -121,9 +121,7 @@
         deep: true, // deep为true，会监视pagination的属性及属性中的对象属性变化
         handler() {
           // 变化后的回调函数，这里我们再次调用getDataFromServer即可
-          //if(!(this.pagination.page == 1 && this.pagination.rowsPerPage ==5)){
             this.getDataFromServer();
-          //}
         }
       },
       filter: {// 监视搜索字段

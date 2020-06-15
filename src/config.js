@@ -7,10 +7,10 @@ const config = {
   },
   api: `${baseUrl}/api`,
   theme:{
-    primary: "#2196F3",
+    primary: "#4caf50",
     // primary: "#212121",
-    // secondary: "#212121",
-    secondary: "#455A64",
+    secondary: "#212121",
+    // secondary: "#455A64",
     accent: "#9c27b0",
     error: "#f44336",
     warning: "#FFC107",

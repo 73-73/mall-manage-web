@@ -35,7 +35,8 @@ export default new Router({
         route("/item/brand",'/item/Brand',"Brand"),
         route("/item/list",'/item/Goods',"Goods"),
         route("/item/specification",'/item/specification/Specification',"Specification"),
-        route("/user/statistics",'/item/Statistics',"Statistics"),//会员管理
+        route("/user/list",'/user/list',"userList"),//会员管理
+        route("/trade/order",'/trade/order',"orderList"),//订单管理
       ],
       meta: {
         auth: true

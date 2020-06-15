@@ -40,7 +40,6 @@
         }
       },
       handleEdit(id, name) {
-        // console.log("更改id为: " + id + ", 名称为: " + name + " 的类目");
         const node = {
           id: id,
           name: name

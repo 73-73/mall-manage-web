@@ -62,19 +62,6 @@ MyComponent.install = function (Vue) {
 
 
 Object.deepCopy = function (src) {
-  // for(let key in src){
-  //   if(!src[key]){
-  //     continue;
-  //   }
-  //   if(src[key].constructor === Array){
-  //     dest[key] = [];
-  //     Object.deepCopy(src[key],dest[key])
-  //   }else if(typeof src[key] === 'object'){
-  //     dest[key] = {};
-  //     Object.deepCopy(src[key],dest[key])
-  //   }
-  //   dest[key] = src[key];
-  // }
   return JSON.parse(JSON.stringify(src));
 }
 

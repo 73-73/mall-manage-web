@@ -4,7 +4,7 @@
     <v-navigation-drawer
       dark
       persistent
-      :mini-variant="miniVariant"
+      :mini-variant="false"
       v-model="drawer"
       enable-resize-watcher
       fixed
@@ -17,7 +17,7 @@
               <img src="../assets/2.jpeg">
             </v-list-tile-avatar>
             <v-list-tile-content>
-              <v-list-tile-title>jack</v-list-tile-title>
+              <v-list-tile-title>{{userInfo.username}}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -40,54 +40,30 @@
           </v-list-tile>
           <!-- 二级菜单 -->
           <v-list-tile v-for="subItem in item.items" :key="subItem.title" :to="item.path + subItem.path">
-            <v-list-tile-content>
-              <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
-            </v-list-tile-content>
-            <v-list-tile-action>
-              <v-icon>{{ subItem.action }}</v-icon>
-            </v-list-tile-action>
+            <template>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ subItem.title }}</v-list-tile-title>
+              </v-list-tile-content>
+              <v-list-tile-action>
+                <v-icon>{{ subItem.action }}</v-icon>
+              </v-list-tile-action>
+            </template>
           </v-list-tile>
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
     <!-- 顶部工具条 -->
-    <!--<v-toolbar
-      app
-      dark
-      :color="dark ? 'secondary' : 'primary'"
-    >-->
     <v-toolbar
       app
       dark
     >
       <!-- 隐藏左侧菜单的按钮-->
       <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
-      <!-- 收起左侧菜单的按钮-->
-      <!--<v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"/>
-      </v-btn>-->
-<!--      &lt;!&ndash; 切换黑暗主题 &ndash;&gt;
-      <v-flex xs1>
-        <v-switch
-          :label="dark ? '暗黑' : '明亮'"
-          v-model="dark"
-          color="dark"
-          hide-details
-        />
-      </v-flex>-->
       <!-- 顶部导航标题 -->
       <v-flex xs5></v-flex>
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="title"/>
       <v-spacer/>
 
-<!--      &lt;!&ndash; 调色板 &ndash;&gt;
-      <v-btn icon @click.stop="dark = !dark">
-        <v-icon>invert_colors</v-icon>
-      </v-btn>
-      &lt;!&ndash; 顶部导航用户菜单 &ndash;&gt;
-      <v-btn icon @click.stop="dark = !dark">
-        <v-icon>account_box</v-icon>
-      </v-btn>-->
     </v-toolbar>
     <!--中间内容主体-->
     <v-content>
@@ -106,15 +82,16 @@
 
 <script>
   import menus from "../menu";
+  import userInfo from "../userInfo";
 
   export default {
     data() {
       return {
         dark: false,// 是否暗黑主题
-        drawer: false,// 左侧导航是否隐藏
-        miniVariant: false,// 左侧导航是否收起
-        title: '商城后台管理',// 顶部导航条名称,
-        menuMap: {}
+        drawer: true,// 左侧导航是否隐藏
+        miniVariant: true,// 左侧导航是否收起
+        title: '商城后台管理系统',// 顶部导航条名称,
+        menuMap: {},
       }
     },
     computed: {
@@ -128,6 +105,9 @@
       item2() {
         const arr = this.$route.path.split("/");
         return this.menuMap[arr[1]][arr[2]];
+      },
+      userInfo() {
+        return userInfo;
       }
     },
     name: 'App',
@@ -147,5 +127,9 @@
 <style scoped>
   .box {
     width: 90%;
+  }
+
+  .a {
+    color: #141517;
   }
 </style>
